@@ -7,8 +7,8 @@ print(torch.__version__)
 torch.manual_seed(0)
 
 from RsNet import ResNet
-from alphazero import AlphaZeroParallel
-from ChessEnvPawnParalle import ChessEPWP
+from AlphaZero import AlphaZeroParallel
+from ChessEnvPawnParallel import ChessEPWP
 
 
 # Trains model with parametesr
@@ -21,18 +21,18 @@ print(device)
 
 model = ResNet(game, 10, 256, device)
 
-# model.load_state_dict(torch.load("model_5_ChessPawnWarsParallel2.pt", map_location=device))
+model.load_state_dict(torch.load("./Models/model_20_ChessPawnWarsParallel7withThreads1000.pt", map_location=device))
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001, weight_decay=0.0001)
 
 args = {
     'C': 2,
-    'num_searches': 200,
-    'num_iterations': 1,
-    'num_selfPlay_iterations': 100,
-    'num_parallel_games' : 100,
-    'num_epochs': 4,
+    'num_searches': 250,
+    'num_iterations': 10,
+    'num_selfPlay_iterations': 1000,
+    'num_parallel_games' : 250,
+    'num_epochs': 6,
     'batch_size': 128,
-    'iteration_num': 0,
+    'iteration_num': 21,
     'temperature': 1.25,
     'dirichlet_epsilon': .3,
     'dirichlet_alpha': .25
