@@ -10,4 +10,4 @@ Trying both: Incentivized Self Play and Games Vs. Stockfish
 - White has been induced to play more king moves
 - Black is pure self play
 
-![game_replay](https://github.com/lordyabu/AlphaPawnwars/assets/92772420/4e46c06a-e72a-44a5-a114-a62544a5e458)
+![ezgif com-resize](https://github.com/lordyabu/AlphaPawnwars/assets/92772420/79df3e5f-de99-499f-85b8-6e5f5ab48bda)
