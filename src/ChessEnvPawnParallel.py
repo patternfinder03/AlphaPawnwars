@@ -42,7 +42,7 @@ class ChessEPWP:
         self.game_count = 0
 
     def __repr__(self):
-        return "ChessPawnWarsParallel7"
+        return "ChessPawnWarsParallel7No-1OtherOneAccIs-1"
 
 
     def _convert_to_list(self, items):
@@ -321,7 +321,7 @@ class ChessEPWP:
                 if self.count_stuffs % 250 == 0:
                     print('draw', self.count_stuffs, 'wins', self.win_counts)
                 self.count_stuffs += 1
-                results.append((-.1, True))
+                results.append((0, True))
             else:
                 results.append((0, False))
 

@@ -21,7 +21,7 @@ print(device)
 
 model = ResNet(game, 10, 256, device)
 
-model.load_state_dict(torch.load("./Models/model_20_ChessPawnWarsParallel7withThreads1000.pt", map_location=device))
+model.load_state_dict(torch.load("./Models/model_23_ChessPawnWarsParallel7No-1withThreads1000bk1.pt", map_location=device))
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001, weight_decay=0.0001)
 
 args = {
@@ -30,9 +30,9 @@ args = {
     'num_iterations': 10,
     'num_selfPlay_iterations': 1000,
     'num_parallel_games' : 250,
-    'num_epochs': 6,
+    'num_epochs': 5,
     'batch_size': 128,
-    'iteration_num': 21,
+    'iteration_num': 24,
     'temperature': 1.25,
     'dirichlet_epsilon': .3,
     'dirichlet_alpha': .25

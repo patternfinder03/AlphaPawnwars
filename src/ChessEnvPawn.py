@@ -347,7 +347,7 @@ class ChessEPW:
             self.count_stuffs += 1
 
             # Maybe set to 0
-            return -.1, True
+            return 0, True
         # print("CCCCCCCCCCCCCCCC")
 
         # cur_eval = self.get_postion_eval(state, action)

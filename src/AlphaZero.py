@@ -46,7 +46,7 @@ class AlphaZeroParallel:
 
                     if not spg.state.piece_at(move.to_square) is None:
                         action_probs[child.action_taken] = child.visit_count * 20
-                    elif str(spg.state.piece_at(move.from_square)) == "K":
+                    elif str(spg.state.piece_at(move.from_square)).upper() == "K":
                         from_rank = move.from_square // 8  # Convert square number to rank (0-7)
                         to_rank = move.to_square // 8  # Convert square number to rank (0-7)
 
@@ -112,25 +112,44 @@ class AlphaZeroParallel:
 
         def process_single_game(spg, args, game):
             action_probs = np.zeros(game.action_size)
-            # num_pawns = len([p for p in spg.state.piece_map().values() if str(p) == "P" or str(p) == "p"])
+            num_pawns = len([p for p in spg.state.piece_map().values() if str(p) == "P" or str(p) == "p"])
 
             for child in spg.root.children:
 
-                move = chess.Move.from_uci(game.int_to_move[str(child.action_taken)])
-                if not spg.state.piece_at(move.to_square) is None and player == -1:
-                    action_probs[child.action_taken] = child.visit_count * 10
+                move = chess.Move.from_uci(self.game.int_to_move[str(child.action_taken)])
+
+                if not spg.state.piece_at(move.to_square) is None:
+                    action_probs[child.action_taken] = child.visit_count * 20
                 elif str(spg.state.piece_at(move.from_square)).upper() == "K":
                     from_rank = move.from_square // 8  # Convert square number to rank (0-7)
                     to_rank = move.to_square // 8  # Convert square number to rank (0-7)
-                    if player == -1:  # Black's perspective
+
+
+                    # Check direction of movement based on player perspective
+                    if player == 1:  # White's perspective
+                        if to_rank > from_rank:  # King moved forward
+                            multiplier = 5
+                        elif to_rank == from_rank:  # King moved sideways
+                            multiplier = 1
+                        else:  # King moved backward
+                            multiplier = 1
+                    elif player == -1:  # Black's perspective
                         if to_rank < from_rank:  # King moved forward
                             multiplier = 5
                         elif to_rank == from_rank:  # King moved sideways
-                            multiplier = 4
+                            multiplier = 1
                         else:  # King moved backward
-                            multiplier = 2
+                            multiplier = 1
                     else:
-                        multiplier = 1
+                        print("ERROR")
+
+                    if num_pawns <= 4:  # Fewer or equal to 4 pawns
+                        multiplier *= 0.25
+                    elif num_pawns <= 6:  # Between 5 to 6 pawns
+                        multiplier *= 0.5
+                    elif num_pawns <= 8:  # Between 7 to 8 pawns
+                        multiplier *= 0.66
+
                     action_probs[child.action_taken] = child.visit_count * multiplier
                 else:
                     action_probs[child.action_taken] = child.visit_count
@@ -231,8 +250,8 @@ class AlphaZeroParallel:
             for epoch in trange(self.args['num_epochs']):
                 self.train(memory)
 
-            torch.save(self.model.state_dict(), f"./Models/model_{iteration + self.args['iteration_num']}_{self.game}withThreads1000bk.pt")
-            torch.save(self.optimizer.state_dict(), f"./Models/optimizer_{iteration + self.args['iteration_num']}_{self.game}withThreads1000bk.pt")
+            torch.save(self.model.state_dict(), f"./Models/model_{iteration + self.args['iteration_num']}_{self.game}withThreads10blocks.pt")
+            torch.save(self.optimizer.state_dict(), f"./Models/optimizer_{iteration + self.args['iteration_num']}_{self.game}withThreads10blocks.pt")
 
 class SPG:
     def __init__(self, game):
