@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from Node import Node
+from Node.node import Node
 import numpy as np
 
 class MCTS:

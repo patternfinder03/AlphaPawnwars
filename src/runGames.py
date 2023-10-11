@@ -4,9 +4,9 @@ import chess
 import torch
 import numpy as np
 
-from src.Resnet.resnet import ResNet
-from src.mcts.mctsParallel import MCTS
-from src.envs.ChessEnvPawn import ChessEPW
+from Resnet.resnet import ResNet
+from mcts.mctsSingle import MCTS
+from envs.ChessEnvPawn import ChessEPW
 import argparse
 
 # Constants

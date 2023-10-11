@@ -14,10 +14,10 @@ class ChessEPW:
 
 
 
-        with open('../data/move_to_int.json', 'r') as json_file:
+        with open('data/move_to_int.json', 'r') as json_file:
             self.move_to_int = json.load(json_file)
 
-        with open('../data/int_to_move.json', 'r') as json_file:
+        with open('data/int_to_move.json', 'r') as json_file:
             self.int_to_move = json.load(json_file)
 
         self.turn = 1
