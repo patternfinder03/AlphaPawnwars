@@ -199,8 +199,6 @@ class ChessEPW:
         board.castling_rights=False
         pawnsW=[8,9,10,11,12,13,14,15]
         pawnsB=[48,49,50,51,52,53,54,55]
-        # pawnsW=[16,26,22,11,12,13,14,15]
-        # pawnsB=[48,42,50,51,32,53,54,55]
         for square in range(8):
             board.set_piece_at(pawnsW[square], chess.Piece(chess.PAWN, chess.WHITE))
             board.set_piece_at(pawnsB[square], chess.Piece(chess.PAWN, chess.BLACK))
@@ -214,7 +212,6 @@ class ChessEPW:
 
     def get_next_state(self, state, action, player):
         actual_move = self.int_to_move[str(action)]
-        # print(state, action, actual_move)
         state.push_uci(actual_move)
         return state
 
@@ -248,7 +245,6 @@ class ChessEPW:
             else:
                 moves = np.append(moves, 0)
 
-        # print(moves)
         return moves
 
     def check_win(self, state, action):
@@ -274,11 +270,6 @@ class ChessEPW:
         if outcome and not outcome.winner or state.can_claim_draw():
             return True
 
-        # if state.can_claim_draw():
-        #     print("22222222222222222DRAWWWWWWW")
-        #     return 12940129049012409
-        #     return True
-
         return False
 
 
@@ -296,69 +287,33 @@ class ChessEPW:
                 else:
                     black_value += self.PIECE_VALUES[piece.piece_type]
 
-        # if black_value != white_value:
-        #     pass
-        #     print(white_value - black_value)
         if not state.turn:
             evaluation = (white_value - black_value) / (white_value + black_value) * .05
-            # if evaluation < .2:
-            #     evaluation = .2
-            # if evaluation > .8:
-            #     evaluation = .8
             return evaluation
         else:
             evaluation = (black_value - white_value) / (black_value + white_value) * .05
-            # if evaluation < .2:
-            #     evaluation = .2
-            # if evaluation > .8:
-            #     evaluation = .8
             return evaluation
 
     def get_value_and_terminated(self, state, action):
-        # print(self.check_win(state, action), 'IS END')
-
-
         if self.check_win(state, action):
-            # print("WIIIIIIIIIIIIIIIIN")
-            # print("CUUREVAL", 1, self.int_to_move[str(action)], state.turn)
             self.win_counts += 1
 
-            # time.sleep(10)
             if self.win_counts % 250 == 0:
                 print('draw', self.count_stuffs, 'wins', self.win_counts)
-                # print('WIN')
-                # print(state)
-            # if state.turn:
-            #     print(self.count)
-            #     dff = pd.read_csv('sssss')
-            #     return 1, True, 1
-            # self.count += 1
+
             return 1, True
 
         if np.sum(self.get_valid_moves(state)) == 0 or self.check_draw(state, action):
-            # print("DRAWWWWW")
-            # print("CUUREVAL", 0, self.int_to_move[str(action)], state.turn)
-            # print(state)
-            # print(state, 'draw')
             if self.count_stuffs % 250 == 0:
                 print('draw', self.count_stuffs, 'wins', self.win_counts)
-                # print("DRAW")
-                # print(state)
+
             self.count_stuffs += 1
 
             # Maybe set to 0
             return 0, True
-        # print("CCCCCCCCCCCCCCCC")
 
-        # cur_eval = self.get_postion_eval(state, action)
-        # if cur_eval < .5 or cur_eval > .5:
-        #     pass
-            # print("NORMAL")
-            # print("CUUREVAL", cur_eval, self.int_to_move[str(action)], state.turn)
-            # print(state)
-        # print(state)
         return 0, False
-        # return cur_eval, False
+
 
     def get_opponent(self, player):
         return -player
