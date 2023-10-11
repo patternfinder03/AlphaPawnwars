@@ -1,13 +1,12 @@
 import pickle
 import pygame
 import chess
-import time
 import torch
 import numpy as np
 
-from RsNet import ResNet
-from MCTS import MCTS
-from ChessEnvPawn import ChessEPW
+from src.Resnet.resnet import ResNet
+from src.mcts.mctsParallel import MCTS
+from src.envs.ChessEnvPawn import ChessEPW
 import argparse
 
 # Constants
@@ -15,7 +14,7 @@ DARK_GREEN = (0, 100, 0)
 LIGHT_GREEN = (0, 255, 0)
 WINDOW_SIZE = (800, 800)
 SQUARE_SIZE = 100
-RESOURCE_PATH = './resources/'
+RESOURCE_PATH = 'Resources/'
 
 pygame.init()
 window = pygame.display.set_mode(WINDOW_SIZE)
@@ -128,7 +127,7 @@ def save_game_moves(game_moves):
 def load_and_navigate():
     pygame.init()
 
-    with open('game_moves.pkl', 'rb') as f:
+    with open('data/game_moves.pkl', 'rb') as f:
         saved_moves = pickle.load(f)
     vgame = ChessEPW()
     index = 0

@@ -17,7 +17,7 @@ class AlphaZeroStockfishParallel:
         self.game = game
         self.args = args
         self.mcts = MCTSParallel(game, args, model)
-        self.stockfish = Stockfish(path=r"C:\Users\theal\PycharmProjects\AlphaPawnwars\src\stockfish\stockfish-windows-x86-64-avx2.exe")
+        self.stockfish = Stockfish(path=r"/src/stockfish/stockfish-windows-x86-64-avx2.exe")
 
 
     # Play self play games. At each move create a tree search using the policy model.

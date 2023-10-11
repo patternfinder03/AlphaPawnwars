@@ -17,7 +17,7 @@ class AlphaZeroSF:
         self.game = game
         self.args = args
         self.mcts = MCTS(game, args, model)
-        self.stockfish = Stockfish(path=r"C:\Users\theal\PycharmProjects\AlphaPawnwars\src\stockfish\stockfish-windows-x86-64-avx2.exe")
+        self.stockfish = Stockfish(path=r"/src/stockfish/stockfish-windows-x86-64-avx2.exe")
 
 
 

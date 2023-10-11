@@ -6,9 +6,9 @@ import torch
 print(torch.__version__)
 torch.manual_seed(0)
 
-from RsNet import ResNet
-from AlphaZero import AlphaZeroParallel
-from ChessEnvPawnParallel import ChessEPWP
+from src.Resnet.resnet import ResNet
+from src.alphazero.alphaZeroParallel import AlphaZeroParallel
+from src.envs.ChessEnvPawnParallel import ChessEPWP
 
 
 # Trains model with parametesr

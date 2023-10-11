@@ -5,24 +5,11 @@ print(np.__version__)
 import torch
 print(torch.__version__)
 
-import torch.nn as nn
-import torch.nn.functional as F
-
 torch.manual_seed(0)
 
-from tqdm.notebook import trange
-
-import random
-import math
-
-import chess
-
-import json
-
-import os
-from RsNet import ResNet
-from AlphaZeroStockfish import AlphaZeroSF
-from ChessEnvPawn import ChessEPW
+from src.Resnet.resnet import ResNet
+from src.alphazero.alphaZeroStockfish import AlphaZeroSF
+from src.envs.ChessEnvPawn import ChessEPW
 
 game = ChessEPW()
 

@@ -5,9 +5,6 @@ import math
 
 class Node:
     def __init__(self, game, args, state, parent=None, action_taken=None, prior=0, visit_count=0):
-        # print("AAAAAAAAAAAAAAAAAAAAAAA")
-        # print(game, state)
-        # return 11111
         self.game = game
         self.args = args
         self.state = state
