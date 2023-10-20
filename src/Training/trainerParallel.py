@@ -21,7 +21,7 @@ print(device)
 
 model = ResNet(game, 5, 256, device)
 
-model.load_state_dict(torch.load("./Models/model_4_ChessPawnWarsParallel7No-1OtherOneAccIs-1withThreads5blocksLessMul2000.pt", map_location=device))
+model.load_state_dict(torch.load("./Models/model_4_ChessPawnWarsParallel_5blocksLessMul2000.pt", map_location=device))
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001, weight_decay=0.0001)
 
 args = {
