@@ -53,14 +53,14 @@ def run_vs_self(model1_path, model2_path):
 
     args = {
         'C': 1,
-        'num_searches': 100,
-        'dirichlet_epsilon': 0.1,
+        'num_searches': 250,
+        'dirichlet_epsilon': 0,
         'dirichlet_alpha': 0.1
     }
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    models = [ResNet(vgame, 10, 256, device) for _ in range(2)]
+    models = [ResNet(vgame, 5, 256, device) for _ in range(2)]
     models[0].load_state_dict(torch.load(model1_path, map_location=device))
     models[1].load_state_dict(torch.load(model2_path, map_location=device))
 
@@ -101,7 +101,7 @@ def draw_board_and_update(window, board):
 def automated_move_logic(board, state, current_mcts, vgame, game_moves, player):
     game_ended = False
     if board.legal_moves:
-        mcts_probs = current_mcts.search(state)
+        mcts_probs = current_mcts.search_biased(state)
         action = np.argmax(mcts_probs)
         value, is_terminal = vgame.get_value_and_terminated(state, action)
 
@@ -162,8 +162,8 @@ def main():
     args = parser.parse_args()
 
     if args.mode == "sp":
-        MODEL_PATH_1 = "./Models/model_18_ChessPawnWarsParallel7withThreads.pt"
-        MODEL_PATH_2 = "./Models/model_19_ChessPawnWarsParallel7withThreads.pt"
+        MODEL_PATH_1 = "./Models/model_5_ChessPawnWarsParallel7No-1OtherOneAccIs-1withThreads5blocksNoMul3000.pt"
+        MODEL_PATH_2 = "./Models/model_5_ChessPawnWarsParallel7No-1OtherOneAccIs-1withThreads5blocksNoMul3000.pt"
         run_vs_self(MODEL_PATH_1, MODEL_PATH_2)
     elif args.mode == "load":
         load_and_navigate()

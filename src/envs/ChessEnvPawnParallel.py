@@ -18,10 +18,10 @@ class ChessEPWP:
 
 
 
-        with open('../data/move_to_int.json', 'r') as json_file:
+        with open('data/move_to_int.json', 'r') as json_file:
             self.move_to_int = json.load(json_file)
 
-        with open('../data/int_to_move.json', 'r') as json_file:
+        with open('data/int_to_move.json', 'r') as json_file:
             self.int_to_move = json.load(json_file)
 
         self.turn = 1
@@ -63,8 +63,12 @@ class ChessEPWP:
 
 
 
-    # Get's a 10 x 8 x 8 matrix to represent current state. Currently using ThreadPoolExecutor,
-    # and have tried changing it to multiprocessing pool but that breaks everything
+    # Get's a 10 x 8 x 8 matrix to represent current state. Currently using ThreadPoolExecutor.
+
+    # Plane 1: White Pawns, Plane 2: White King, Plane 3: Black Pawns, Plane 4: Black King
+    # Planes 5/6: Squares of pieces that can capture / king moves
+    # Planes 7/8: Columns 1s where capture  can take place
+    # Planes 9/10: Passed Pawns
     def get_encoded_state(self, states):
         states = self._flatten_nested_list(states)
 
@@ -81,7 +85,7 @@ class ChessEPWP:
             rank = chess.square_rank(square)
             pawn_color = pawn.color
 
-            enemy_pawns = state.pieces(chess.PAWN, not pawn_color)
+            # enemy_pawns = state.pieces(chess.PAWN, not pawn_color)
 
             # Define the rank direction based on the pawn's color
             rank_direction = 1 if pawn_color == chess.WHITE else -1
