@@ -162,8 +162,8 @@ def main():
     args = parser.parse_args()
 
     if args.mode == "sp":
-        MODEL_PATH_1 = "./Models/model_5_ChessPawnWarsParallel7No-1OtherOneAccIs-1withThreads5blocksNoMul3000.pt"
-        MODEL_PATH_2 = "./Models/model_5_ChessPawnWarsParallel7No-1OtherOneAccIs-1withThreads5blocksNoMul3000.pt"
+        MODEL_PATH_1 = "./Models/model_4_ChessPawnWarsParallel_5blocksLessMul2000.pt"
+        MODEL_PATH_2 = "./Models/model_4_ChessPawnWarsParallel_5blocksLessMul2000.pt"
         run_vs_self(MODEL_PATH_1, MODEL_PATH_2)
     elif args.mode == "load":
         load_and_navigate()
