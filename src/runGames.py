@@ -145,7 +145,7 @@ def handle_pygame_events():
             exit()
 
 
-def draw_board_and_update(window, board, player_color):
+def draw_board_and_update(window, board, player_color=1):
     draw_board(window, board, player_color)
     pygame.display.flip()
 
@@ -265,8 +265,8 @@ def main():
     args = parser.parse_args()
 
     if args.mode == "sp":
-        MODEL_PATH_1 = "./Models/model_6_ChessPawnWarsParallel7No-1OtherOneAccIs-1withThreads5blocksNoMul4000.pt"
-        MODEL_PATH_2 = "./Models/model_6_ChessPawnWarsParallel7No-1OtherOneAccIs-1withThreads5blocksNoMul4000.pt"
+        MODEL_PATH_1 = "./Models/model_7_ChessPawnWarsParallel7No-1OtherOneAccIs-1withThreads5blocksNoMul4000.pt"
+        MODEL_PATH_2 = "./Models/model_7_ChessPawnWarsParallel7No-1OtherOneAccIs-1withThreads5blocksNoMul4000.pt"
         run_vs_self(MODEL_PATH_1, MODEL_PATH_2)
 
     if args.mode == "play":
