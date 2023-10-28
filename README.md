@@ -16,8 +16,8 @@ Trying both: Incentivized Self Play and Games Vs. Stockfish
 
 ## Second decent results
 
-- Built upon White model above (10000 games)
-- Built upon White model above (10000 games)
+- Built upon White model above then 8000 selfplay games (10000 games)
+- Built upon White model above: then 8000 selfplay games (10000 games)
 
 The model seems to employ the Fox in the Chicken Coop strategy
 
