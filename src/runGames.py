@@ -105,7 +105,7 @@ def run_vs_self(model1_path, model2_path):
 
     args = {
         'C': 1,
-        'num_searches': 250,
+        'num_searches': 50,
         'dirichlet_epsilon': 0,
         'dirichlet_alpha': 0.1
     }
@@ -126,7 +126,7 @@ def run_vs_self(model1_path, model2_path):
 
     running, game_ended = True, False
     while running:
-        handle_pygame_events()
+        # handle_pygame_events()
 
         draw_board_and_update(window, board)
 
@@ -135,6 +135,7 @@ def run_vs_self(model1_path, model2_path):
 
             player = vgame.get_opponent(player)
 
+    print("SAVING")
     save_game_moves(game_moves)
     pygame.quit()
 
@@ -168,13 +169,14 @@ def automated_move_logic(board, state, current_mcts, vgame, game_moves, player):
             game_ended = True
             print("Game Over! Closing in 5 seconds...")
             pygame.time.wait(5000)
+            save_game_moves(game_moves)
             exit()
 
     return game_ended
 
 
 def save_game_moves(game_moves):
-    with open('game_moves1.pkl', 'wb') as f:
+    with open('./data/game_moves.pkl', 'wb') as f:
         pickle.dump(game_moves, f)
 
 
@@ -202,7 +204,7 @@ def load_and_navigate():
                         board.pop()  # undo last move
                         index -= 1
 
-        draw_board(window, board)
+        draw_board(window, board, player_color=1)
         pygame.display.flip()
 
     pygame.quit()
@@ -265,8 +267,8 @@ def main():
     args = parser.parse_args()
 
     if args.mode == "sp":
-        MODEL_PATH_1 = "./Models/model_7_ChessPawnWarsParallel7No-1OtherOneAccIs-1withThreads5blocksNoMul4000.pt"
-        MODEL_PATH_2 = "./Models/model_7_ChessPawnWarsParallel7No-1OtherOneAccIs-1withThreads5blocksNoMul4000.pt"
+        MODEL_PATH_1 = "./Models/model_8_ChessPawnWarsParallel7No-1OtherOneAccIs-1withThreads5blocksNoMul4000.pt"
+        MODEL_PATH_2 = "./Models/model_8_ChessPawnWarsParallel7No-1OtherOneAccIs-1withThreads5blocksNoMul4000.pt"
         run_vs_self(MODEL_PATH_1, MODEL_PATH_2)
 
     if args.mode == "play":
