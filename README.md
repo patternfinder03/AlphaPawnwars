@@ -2,6 +2,14 @@
 
 Fitting the AlphaZero model with some tweaks to the chess variant game Pawn Wars.
 
+## Overview
+
+AlphaPawnwars is an implementation of the AlphaZero algorithm tailored to the Pawn Wars variant of chess. The project explores various techniques to improve the model's performance, including incentivized self-play and competitive games against Stockfish.
+
+### Goal of Pawn Wars
+
+The primary objective in Pawn Wars is to advance one of your pawns to the other side of the board. This variant emphasizes pawn strategy and positioning over traditional chess tactics.
+
 ## Results
 
 ### First Decent Results
@@ -15,10 +23,6 @@ Fitting the AlphaZero model with some tweaks to the chess variant game Pawn Wars
 - **Emergent Strategy**: The model employs the "Fox in the Chicken Coop" strategy.
 
 ![Second Results](https://github.com/lordyabu/AlphaPawnwars/assets/92772420/5378b95f-1ef3-47f6-8efa-67bbfa80b856)
-
-## Overview
-
-AlphaPawnwars is an implementation of the AlphaZero algorithm tailored to the Pawn Wars variant of chess. The project explores various techniques to improve the model's performance, including incentivized self-play and competitive games against Stockfish.
 
 ## Technical Details
 
@@ -89,3 +93,8 @@ Here is an example of how the move probabilities are adjusted:
   - Adjustment for pawns: 0.5
   - Final multiplier: 3 * 0.5 = 1.5
 
+## Conclusion
+
+AlphaPawnwars demonstrates the potential of tailored modifications to the AlphaZero algorithm for specific chess variants. By adjusting state representation and move probabilities, the model can develop unique strategies and improve its performance in Pawn Wars.
+
+Feel free to explore the code and experiment with further adjustments to enhance the model's capabilities!
